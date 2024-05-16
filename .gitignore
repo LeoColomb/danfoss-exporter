@@ -1,0 +1,8 @@
+.settings
+.vscode/
+target/
+.classpath
+*.bin
+*.jar
+generated
+.env
