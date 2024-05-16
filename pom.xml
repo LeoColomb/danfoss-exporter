@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.leocolomb.danfoss</groupId>
-  <artifactId>devireg-exporter</artifactId>
+  <artifactId>danfoss-exporter</artifactId>
   <version>1.0.0</version>
 
-  <name>DeviReg Exporter for Prometheus/InfluxDB</name>
+  <name>Danfoss Exporter for InfluxDB</name>
 
   <dependencies>
     <dependency>
@@ -68,12 +68,27 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.2.0</version>
         <configuration>
-          <mainClass>org.github.leocolomb.danfoss.internal.Main</mainClass>
+          <mainClass>io.github.leocolomb.danfoss.internal.Main</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>io.github.leocolomb.danfoss.internal.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
       </plugin>
     </plugins>
   </build>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
   </properties>
 </project>

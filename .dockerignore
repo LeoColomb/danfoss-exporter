@@ -1,0 +1,10 @@
+# flyctl launch added from .gitignore
+**/.settings
+**/.vscode
+**/target
+**/.classpath
+**/*.bin
+**/*.jar
+**/generated
+**/.env
+fly.toml
