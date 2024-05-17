@@ -51,18 +51,16 @@ public class Main {
         InfluxDBClient client = InfluxDBClient.getInstance(config);
 
         logger.info("Registering shutdown hook");
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                Main.close();
-            }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            Main.close();
         }, "Shutdown thread"));
 
         logger.info("Connecting to the grid");
         masterHandler = new IconMasterHandler(dotenv.get("SDG_PEER_ID"));
         masterHandler.initialize();
         masterHandler.scanRooms();
-        // masterHandler.refresh();
 
+        logger.info("Registering schedulers");
         scheduler.scheduleAtFixedRate(() -> {
             g_points.addAll(masterHandler.getPoints());
             if (!g_points.isEmpty()) {
@@ -77,6 +75,10 @@ public class Main {
                 logger.trace("No point to send to database");
             }
         }, 5, 5, TimeUnit.SECONDS);
+
+        scheduler.scheduleAtFixedRate(() -> {
+            masterHandler.refresh();
+        }, 5, 120, TimeUnit.MINUTES);
     }
     
     public static void close() {
