@@ -20,8 +20,11 @@ abstract public class BaseHandler {
     protected final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     public void updateState(String ch, Object value) {
-        addPoint(Point.measurement(String.format("%s_v1", BINDING_ID))
-            .setField(ch, value)
+        addPoint(
+            Point
+                .measurement(getMeasurement())
+                .setField(ch, value)
+                .setTimestamp(null)
         );
     }
 
@@ -34,13 +37,19 @@ abstract public class BaseHandler {
     }
 
     protected void addPoint(Point point) {
-        points.add(point
-            .setTag("location", getName())
-            .setTimestamp(null)
-        );
+        points.add(point);
     }
 
-    protected abstract String getName();
+    protected void reportTemperature(String ch, double temp) {
+        logger.trace("Received {} = {}", ch, temp);
+        updateState(ch, temp);
+    }
+
+    protected String getMeasurement() {
+        return String.format("%s_v2", BINDING_ID);
+    }
+
+    public abstract void refresh();
 
     public List<Point> getPoints() {
         List<Point> l_points = new ArrayList<Point>(this.points);

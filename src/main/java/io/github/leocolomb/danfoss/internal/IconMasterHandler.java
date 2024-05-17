@@ -37,10 +37,6 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
         connHandler.dispose();
     }
 
-    public String getName() {
-        return "master";
-    }
-
     @Override
     public void reportStatus(@NonNull String status, @NonNull String statusDetail, String description) {
         updateStatus(status, statusDetail, description);
@@ -63,8 +59,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                     if (!name.isEmpty()) {
                         int number = pkt.getMsgClass() - ROOM_FIRST;
                         logger.info("Detected Icon Room #{} \"{}\" on master {}", number, name, peerId);
-                        this.childHandlerInitialized(new IconRoomHandler(number));
-                        rooms[number].handlePacket(pkt);
+                        this.childHandlerInitialized(new IconRoomHandler(number, name));
                     }
                 }
             }
@@ -76,19 +71,33 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                 case PAUSE_SETPOINT:
                     reportTemperature(CHANNEL_SETPOINT_ANTIFREEZE, pkt.getDecimal());
                     break;
+                // case GLOBAL_HARDWAREREVISION:
+                //     updateProperty("hardware", pkt.getVersion().toString());
+                //     break;
+                // case GLOBAL_SOFTWAREREVISION:
+                //     firmwareVer = pkt.getVersion();
+                //     reportFirmware();
+                //     break;
+                // case GLOBAL_SOFTWAREBUILDREVISION:
+                //     firmwareBuild = Short.toUnsignedInt(pkt.getShort());
+                //     reportFirmware();
+                //     break;
+                // case GLOBAL_SERIALNUMBER:
+                //     updateProperty("serial_number", String.valueOf(pkt.getInt()));
+                //     break;
+                // case GLOBAL_PRODUCTIONDATE:
+                //     updateProperty("production_date", DateFormat.getDateTimeInstance().format(pkt.getDate(0)));
+                //     break;
+                // case MDG_CONNECTION_COUNT:
+                //     updateProperty("connection_count", String.valueOf(pkt.getByte()));
+                //     break;
             }
         }
     }
 
-    private void reportTemperature(String ch, double temp) {
-        logger.trace("Received {} = {}", ch, temp);
-        updateState(ch, temp);
-    }
-
     // private void reportFirmware() {
     //     if (firmwareVer != null && firmwareBuild != -1) {
-    //         updateProperty(Thing.PROPERTY_FIRMWARE_VERSION,
-    //                 firmwareVer.toString() + "." + String.valueOf(firmwareBuild));
+    //         updateProperty("firmware", firmwareVer.toString() + "." + String.valueOf(firmwareBuild));
     //     }
     // }
 
@@ -120,8 +129,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
             } else {
                 logger.trace("Room {} initialized", roomId);
                 room.setConnectionHandler(connHandler);
-                room.sendRefresh(ROOM_ROOMTEMPERATURE);
-                room.sendRefresh(ROOM_BATTERYINDICATIONPERCENT);
+                room.refresh();
                 rooms[roomId] = room;
             }
         }
@@ -137,12 +145,25 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
         }
     }
 
+    @Override
+    public void refresh() {
+        for (IconRoomHandler room : rooms) {
+            if (room != null) {
+                room.refresh();
+            }
+        }
+    }
+
+    protected String getMeasurement() {
+        return String.format("%s_master_v1", BINDING_ID);
+    }
+
     public List<Point> getPoints() {
         List<Point> l_points = new ArrayList<Point>();
 
         l_points.addAll(super.getPoints());
 
-        for (BaseHandler room : rooms) {
+        for (IconRoomHandler room : rooms) {
             if (room != null) {
                 l_points.addAll(room.getPoints());
             }

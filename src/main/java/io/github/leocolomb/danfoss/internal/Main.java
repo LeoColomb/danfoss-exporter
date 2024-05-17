@@ -61,6 +61,7 @@ public class Main {
         masterHandler = new IconMasterHandler(dotenv.get("SDG_PEER_ID"));
         masterHandler.initialize();
         masterHandler.scanRooms();
+        // masterHandler.refresh();
 
         scheduler.scheduleAtFixedRate(() -> {
             g_points.addAll(masterHandler.getPoints());

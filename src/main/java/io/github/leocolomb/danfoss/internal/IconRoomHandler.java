@@ -8,6 +8,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.influxdb.v3.client.Point;
+
 import io.github.leocolomb.danfoss.internal.protocol.Dominion;
 import io.github.leocolomb.danfoss.internal.protocol.Icon.RoomControl;
 import io.github.leocolomb.danfoss.internal.protocol.Icon.RoomMode;
@@ -16,6 +18,7 @@ public class IconRoomHandler extends BaseHandler {
 
     private final Logger logger = LoggerFactory.getLogger(IconRoomHandler.class);
     private int roomNumber;
+    private String roomName;
     private SDGPeerConnector connHandler;
     private boolean isOnline;
 
@@ -23,12 +26,29 @@ public class IconRoomHandler extends BaseHandler {
         this.roomNumber = roomNumber;
     }
 
+    public IconRoomHandler(int roomNumber, @NonNull String roomName) {
+        this.roomNumber = roomNumber;
+        this.roomName = roomName;
+    }
+
     public int getNumber() {
         return roomNumber;
     }
 
     public String getName() {
-        return String.format("room_%d", getNumber());
+        if (!roomName.isEmpty()) {
+            return roomName;
+        } 
+        return String.valueOf(roomNumber);
+    }
+
+    @Override
+    protected void addPoint(Point point) {
+        super.addPoint(point
+            .setTag("room_name", getName())
+        );
+        // return String.format("room_%d", getNumber());
+
     }
 
     public void setConnectionHandler(SDGPeerConnector h) {
@@ -37,6 +57,20 @@ public class IconRoomHandler extends BaseHandler {
 
     public void setConfigError(String reason) {
         updateStatus("OFFLINE", "OFFLINE.CONFIGURATION_ERROR", reason);
+    }
+
+    @Override
+    public void refresh() {
+        sendRefresh(ROOM_FLOORTEMPERATURE);
+        sendRefresh(ROOM_ROOMTEMPERATURE);
+        sendRefresh(ROOM_SETPOINTATHOME);
+        sendRefresh(ROOM_SETPOINTASLEEP);
+        sendRefresh(ROOM_SETPOINTAWAY);
+        sendRefresh(ROOM_FLOORTEMPERATUREMINIMUM);
+        sendRefresh(ROOM_FLOORTEMPERATUREMAXIMUM);
+        sendRefresh(ROOM_BATTERYINDICATIONPERCENT);
+        sendRefresh(ROOM_ROOMMODE);
+        sendRefresh(ROOM_ROOMCONTROL);
     }
 
     public void sendRefresh(int msgCode) {
@@ -89,14 +123,10 @@ public class IconRoomHandler extends BaseHandler {
                 reportSwitch(CHANNEL_MANUAL_MODE, pkt.getByte() == RoomControl.Manual);
                 break;
             case ROOMNAME:
-                updateProperty("roomName", pkt.getString());
+                roomName = pkt.getString();
+                refresh();
                 break;
         }
-    }
-
-    private void reportTemperature(String ch, double temp) {
-        logger.trace("Received {} = {}", ch, temp);
-        updateState(ch, temp);
     }
 
     private void reportDecimal(String ch, long value) {
@@ -125,6 +155,7 @@ public class IconRoomHandler extends BaseHandler {
 
     private void updateProperty(String ch, Object prop) {
         logger.trace("Received {} = {}", ch, prop);
+
         updateState(ch, prop);
     }
 }
