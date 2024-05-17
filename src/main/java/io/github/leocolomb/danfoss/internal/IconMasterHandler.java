@@ -64,6 +64,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                         int number = pkt.getMsgClass() - ROOM_FIRST;
                         logger.info("Detected Icon Room #{} \"{}\" on master {}", number, name, peerId);
                         this.childHandlerInitialized(new IconRoomHandler(number));
+                        rooms[number].handlePacket(pkt);
                     }
                 }
             }
@@ -119,6 +120,8 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
             } else {
                 logger.trace("Room {} initialized", roomId);
                 room.setConnectionHandler(connHandler);
+                room.sendRefresh(ROOM_ROOMTEMPERATURE);
+                room.sendRefresh(ROOM_BATTERYINDICATIONPERCENT);
                 rooms[roomId] = room;
             }
         }

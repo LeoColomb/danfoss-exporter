@@ -21,8 +21,7 @@ abstract public class BaseHandler {
 
     public void updateState(String ch, Object value) {
         addPoint(Point.measurement(String.format("%s_v1", BINDING_ID))
-            .setField("name", ch)
-            .setField("value", value)
+            .setField(ch, value)
         );
     }
 

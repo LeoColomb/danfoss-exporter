@@ -67,7 +67,7 @@ public class DanfossBindingConfig extends HashMap<String, String> {
         // the new option in binding config. Consequently, the field in DeviRegBindingConfig
         // object stays null.
         if (newConfig.userName == null) {
-            newConfig.userName = "OpenSDG test";
+            newConfig.userName = "Danfoss InfluxDB Exporter";
         }
 
         g_Config.update(newConfig);

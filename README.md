@@ -17,15 +17,30 @@ operate.
 Note that Danfoss Icon support is currently incomplete and in beta state. It was done entirely with user's
 support; i, the developer, don't have Icon hardware on my disposal.
 
-## Installation and supported architectures
+## About
 
 This binding relies on OpenSDG library (https://github.com/Sonic-Amiga/opensdg-java) for communicating with the hardware.
 On Linux OS It is necessary to manually install the library in your system before using this binding. On Windows no extra
 components need to be installed.
 
-## Discovery
+## Init
 
-> TBD
+1. [Create a Codespace](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=219595866&skip_quickstart=true) for https://github.com/Sonic-Amiga/opensdg
+2. Install dependencies
+   ```console
+   sudo apt update & sudo apt install protobuf-c-compiler libprotobuf-c-dev
+   ```
+3. Build
+   ```console
+   cmake .
+   make -C library/
+   make -C testapp/
+   ```
+4. Run & Pair
+   ```console
+   ./testapp/opensdg_test
+   ```
+5. Copy Private Key & Peer ID
 
 ## Binding Configuration
 
