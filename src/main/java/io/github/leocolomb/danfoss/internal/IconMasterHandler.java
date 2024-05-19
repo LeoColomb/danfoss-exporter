@@ -108,13 +108,13 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
     @Override
     public void ping() {
         // Need to request something small. Let's use VACATION_SETPOINT.
-        connHandler.SendPacket(new Dominion.Packet(ALL_ROOMS, VACATION_SETPOINT));
+        connHandler.sendRefresh(ALL_ROOMS, VACATION_SETPOINT);
     }
 
     public void scanRooms() {
         // Request names for all the rooms
         for (int msgClass = ROOM_FIRST; msgClass <= ROOM_LAST; msgClass++) {
-            connHandler.SendPacket(new Dominion.Packet(msgClass, ROOMNAME));
+            connHandler.sendRefresh(msgClass, ROOMNAME);
         }
     }
 
@@ -147,6 +147,9 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
 
     @Override
     public void refresh() {
+        connHandler.sendRefresh(ALL_ROOMS, VACATION_SETPOINT);
+        connHandler.sendRefresh(ALL_ROOMS, PAUSE_SETPOINT);
+
         for (IconRoomHandler room : rooms) {
             if (room != null) {
                 room.refresh();
