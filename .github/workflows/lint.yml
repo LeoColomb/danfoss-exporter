@@ -1,0 +1,14 @@
+name: Lint
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Code Base
+    uses: LeoColomb/.github/.github/workflows/lint.yml@main
