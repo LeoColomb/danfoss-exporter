@@ -132,7 +132,7 @@ public class IconRoomHandler extends BaseHandler {
                 reportSwitch(CHANNEL_MANUAL_MODE, pkt.getByte() == RoomControl.Manual);
                 break;
             case ROOM_HEATINGCOOLINGSTATE:
-                reportSwitch(CHANNEL_CONTROL_MODE, pkt.getBoolean());
+                reportSwitch(CHANNEL_HEATING_STATE, pkt.getBoolean());
                 break;
             case ROOMNAME:
                 roomName = pkt.getString();
