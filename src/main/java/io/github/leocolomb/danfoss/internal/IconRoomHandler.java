@@ -38,7 +38,7 @@ public class IconRoomHandler extends BaseHandler {
     public String getName() {
         if (!roomName.isEmpty()) {
             return roomName;
-        } 
+        }
         return String.valueOf(roomNumber);
     }
 
@@ -63,6 +63,8 @@ public class IconRoomHandler extends BaseHandler {
     public void refresh() {
         sendRefresh(ROOM_FLOORTEMPERATURE);
         sendRefresh(ROOM_ROOMTEMPERATURE);
+        sendRefresh(ROOM_SETPOINTMAXIMUM);
+        sendRefresh(ROOM_SETPOINTMINIMUM);
         sendRefresh(ROOM_SETPOINTATHOME);
         sendRefresh(ROOM_SETPOINTASLEEP);
         sendRefresh(ROOM_SETPOINTAWAY);
@@ -71,6 +73,7 @@ public class IconRoomHandler extends BaseHandler {
         sendRefresh(ROOM_BATTERYINDICATIONPERCENT);
         sendRefresh(ROOM_ROOMMODE);
         sendRefresh(ROOM_ROOMCONTROL);
+        sendRefresh(ROOM_HEATINGCOOLINGSTATE);
     }
 
     public void sendRefresh(int msgCode) {
@@ -98,6 +101,12 @@ public class IconRoomHandler extends BaseHandler {
             case ROOM_ROOMTEMPERATURE:
                 reportTemperature(CHANNEL_TEMPERATURE_ROOM, pkt.getDecimal());
                 break;
+            case ROOM_SETPOINTMAXIMUM:
+                reportTemperature(CHANNEL_SETPOINT_MAXIMUM, pkt.getDecimal());
+                break;
+            case ROOM_SETPOINTMINIMUM:
+                reportTemperature(CHANNEL_SETPOINT_MINIMUM, pkt.getDecimal());
+                break;
             case ROOM_SETPOINTATHOME:
                 reportTemperature(CHANNEL_SETPOINT_COMFORT, pkt.getDecimal());
                 break;
@@ -121,6 +130,9 @@ public class IconRoomHandler extends BaseHandler {
                 break;
             case ROOM_ROOMCONTROL:
                 reportSwitch(CHANNEL_MANUAL_MODE, pkt.getByte() == RoomControl.Manual);
+                break;
+            case ROOM_HEATINGCOOLINGSTATE:
+                reportSwitch(CHANNEL_CONTROL_MODE, pkt.getBoolean());
                 break;
             case ROOMNAME:
                 roomName = pkt.getString();

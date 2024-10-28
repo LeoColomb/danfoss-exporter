@@ -30,6 +30,8 @@ public class DanfossBindingConstants {
     // List of all Channel ids
     public static final String CHANNEL_TEMPERATURE_FLOOR = "temperature_floor";
     public static final String CHANNEL_TEMPERATURE_ROOM = "temperature_room";
+    public static final String CHANNEL_SETPOINT_MAXIMUM = "setpoint_maximum";
+    public static final String CHANNEL_SETPOINT_MINIMUM = "setpoint_minimum";
     public static final String CHANNEL_SETPOINT_COMFORT = "setpoint_comfort";
     public static final String CHANNEL_SETPOINT_ECONOMY = "setpoint_economy";
     public static final String CHANNEL_SETPOINT_ASLEEP = "setpoint_asleep";
