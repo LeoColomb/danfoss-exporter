@@ -255,6 +255,7 @@ public class Icon {
         public static final int ROOM_WAKEUPINTERVAL                            = 801;   // 2   short
         public static final int ROOM_CHECKINTEMPERATURECHANGE                  = 802;   // 2   short
         public static final int ROOM_DISPLAYEDTEMPERATURE                      = 809;   // 2   short
+        public static final int ROOM_WARMUPACTIVATED                           = 816;   // 1   byte
         public static final int ROOM_ERRORCODE                                 = 1008;  // 2   short     See below.
         public static final int ROOM_SETPOINTMINIMUM                           = 1287;
         public static final int ROOM_SETPOINTMAXIMUM                           = 1288;

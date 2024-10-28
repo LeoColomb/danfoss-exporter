@@ -139,8 +139,6 @@ public class IconRoomHandler extends BaseHandler {
                 roomName = pkt.getString();
                 refresh();
                 break;
-            default:
-                updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getLength()), "");
         }
     }
 
