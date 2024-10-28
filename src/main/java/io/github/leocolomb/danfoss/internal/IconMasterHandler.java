@@ -71,6 +71,9 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                 case PAUSE_SETPOINT:
                     reportTemperature(CHANNEL_SETPOINT_ANTIFREEZE, pkt.getDecimal());
                     break;
+                case ROOMMODE:
+                    reportControlMode(pkt.getByte());
+                    break;
                 // case GLOBAL_HARDWAREREVISION:
                 //     updateProperty("hardware", pkt.getVersion().toString());
                 //     break;
@@ -106,6 +109,20 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
 
     public void updateStatus(@NonNull String status, @NonNull String statusDetail, String description) {
         logger.info("Status {}, {}, {}", status, statusDetail, description);
+    }
+
+    private void reportControlMode(byte info) {
+        // final String[] CONTROL_MODES = { "HOME", "AWAY", "ASLEEP", "FATAL" };
+        // String mode;
+
+        // if (info >= RoomMode.AtHome && info <= RoomMode.Fatal) {
+        //     mode = CONTROL_MODES[info];
+        // } else {
+        //     mode = "";
+        // }
+
+        logger.trace("Received {} = {}", CHANNEL_CONTROL_MODE, info);
+        updateState(CHANNEL_CONTROL_MODE.concat("_number"), String.valueOf(info));
     }
 
     @Override
