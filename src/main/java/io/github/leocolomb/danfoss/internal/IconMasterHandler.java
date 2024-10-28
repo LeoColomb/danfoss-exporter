@@ -74,6 +74,8 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                 case ROOMMODE:
                     reportControlMode(pkt.getByte());
                     break;
+                default:
+                    updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getLength()), "");
                 // case GLOBAL_HARDWAREREVISION:
                 //     updateProperty("hardware", pkt.getVersion().toString());
                 //     break;
