@@ -54,7 +54,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
             } else {
                 if (pkt.getMsgCode() == ROOMNAME) {
                     String name = pkt.getString();
-        
+
                     // Unused rooms are reported as having empty names, ignore them.
                     if (!name.isEmpty()) {
                         int number = pkt.getMsgClass() - ROOM_FIRST;
@@ -90,6 +90,9 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                 //     break;
                 // case MDG_CONNECTION_COUNT:
                 //     updateProperty("connection_count", String.valueOf(pkt.getByte()));
+                //     break;
+                // case RAIL_INPUTHEATORCOOL:
+                //     updateProperty("cooling", String.valueOf(pkt.getBoolean()));
                 //     break;
             }
         }

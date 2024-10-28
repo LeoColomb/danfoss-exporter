@@ -165,9 +165,9 @@ public class IconRoomHandler extends BaseHandler {
         updateState(CHANNEL_CONTROL_STATE, String.valueOf(state));
     }
 
-    private void updateProperty(String ch, Object prop) {
-        logger.trace("Received {} = {}", ch, prop);
+    // private void updateProperty(String ch, Object prop) {
+    //     logger.trace("Received {} = {}", ch, prop);
 
-        updateState(ch, prop);
-    }
+    //     updateState(ch, prop);
+    // }
 }
