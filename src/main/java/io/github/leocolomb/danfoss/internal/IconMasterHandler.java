@@ -72,7 +72,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                     reportTemperature(CHANNEL_SETPOINT_ANTIFREEZE, pkt.getDecimal());
                     break;
                 case ROOMMODE:
-                    reportState(CHANNEL_CONTROL_MODE, CONTROL_MODES, pkt.getByte())
+                    reportState(CHANNEL_CONTROL_MODE, CONTROL_MODES, pkt.getByte());
                     break;
                 case SYSTEM_TIME:
                     break;
