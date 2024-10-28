@@ -44,6 +44,7 @@ public class DanfossBindingConstants {
     public static final String CHANNEL_SETPOINT_WARNING = "setpoint_warning";
     public static final String CHANNEL_CONTROL_STATE = "control_state";
     public static final String CHANNEL_CONTROL_MODE = "control_mode";
+    public static final String CHANNEL_CONTROL_ROOM = "control_room";
     public static final String CHANNEL_WINDOW_DETECTION = "window_detection";
     public static final String CHANNEL_WINDOW_OPEN = "window_open";
     public static final String CHANNEL_FORECAST = "forecast";
@@ -55,15 +56,18 @@ public class DanfossBindingConstants {
     public static final String CHANNEL_ON_TIME_7_DAYS = "on_time_7_days";
     public static final String CHANNEL_ON_TIME_30_DAYS = "on_time_30_days";
     public static final String CHANNEL_ON_TIME_TOTAL = "on_time_total";
-    public static final String CHANNEL_MANUAL_MODE = "manual_mode";
 
     public static final String CHANNEL_DISCONNECTED = "sensor_disconnected";
     public static final String CHANNEL_SHORTED = "sensor_shorted";
     public static final String CHANNEL_OVERHEAT = "overheat";
     public static final String CHANNEL_UNRECOVERABLE = "unrecoverable";
 
-    public static final String[] ALARM_CHANNELS = { CHANNEL_DISCONNECTED, CHANNEL_SHORTED, CHANNEL_OVERHEAT,
-        CHANNEL_UNRECOVERABLE };
+    public static final String[] ALARM_CHANNELS = {
+        CHANNEL_DISCONNECTED, // 0
+        CHANNEL_SHORTED,      // 1
+        CHANNEL_OVERHEAT,     // 2
+        CHANNEL_UNRECOVERABLE // 3
+    };
 
     public static final String CONTROL_MODE_MANUAL = "MANUAL";
     public static final String CONTROL_MODE_OVERRIDE = "OVERRIDE";
@@ -72,14 +76,32 @@ public class DanfossBindingConstants {
     public static final String CONTROL_MODE_PAUSE = "PAUSE";
     public static final String CONTROL_MODE_OFF = "OFF";
 
-    public static final String[] CONTROL_MODES = { CONTROL_MODE_SCHEDULE, CONTROL_MODE_VACATION, CONTROL_MODE_PAUSE,
-        CONTROL_MODE_OVERRIDE };
+    public static final String[] CONTROL_MODES = {
+        CONTROL_MODE_SCHEDULE, // 0
+        CONTROL_MODE_VACATION, // 1
+        CONTROL_MODE_PAUSE,    // 2
+        CONTROL_MODE_OVERRIDE  // 3
+    };
 
     public static final String CONTROL_STATE_HOME = "HOME";
     public static final String CONTROL_STATE_AWAY = "AWAY";
     public static final String CONTROL_STATE_ASLEEP = "ASLEEP";
     public static final String CONTROL_STATE_FATAL = "FATAL";
 
-    public static final String[] CONTROL_STATES = { CONTROL_STATE_HOME, CONTROL_STATE_AWAY, CONTROL_STATE_ASLEEP,
-        CONTROL_STATE_FATAL };
+    public static final String[] CONTROL_STATES = {
+        CONTROL_STATE_HOME,   // 0
+        CONTROL_STATE_AWAY,   // 1
+        CONTROL_STATE_ASLEEP, // 2
+        CONTROL_STATE_FATAL   // 3
+    };
+
+    public static final String CONTROL_ROOM_HOME = "MANUAL";
+    public static final String CONTROL_ROOM_AUTO = "AUTO";
+    public static final String CONTROL_ROOM_SCHEDULE = "SCHEDULE";
+
+    public static final String[] CONTROL_ROOMS = {
+        CONTROL_ROOM_HOME,    // 0
+        CONTROL_ROOM_AUTO,    // 1
+        CONTROL_ROOM_SCHEDULE // 20
+    };
 }

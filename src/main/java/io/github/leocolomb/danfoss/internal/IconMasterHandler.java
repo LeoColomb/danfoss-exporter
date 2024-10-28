@@ -72,7 +72,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                     reportTemperature(CHANNEL_SETPOINT_ANTIFREEZE, pkt.getDecimal());
                     break;
                 case ROOMMODE:
-                    reportControlMode(pkt.getByte());
+                    reportState(CHANNEL_CONTROL_MODE, CONTROL_MODES, pkt.getByte())
                     break;
                 case SYSTEM_TIME:
                     break;
@@ -110,23 +110,6 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
     //         updateProperty("firmware", firmwareVer.toString() + "." + String.valueOf(firmwareBuild));
     //     }
     // }
-
-    public void updateStatus(@NonNull String status, @NonNull String statusDetail, String description) {
-        logger.info("Status {}, {}, {}", status, statusDetail, description);
-    }
-
-    private void reportControlMode(byte info) {
-        String mode;
-
-        if (info >= 0 && info < CONTROL_MODES.length) {
-            mode = CONTROL_MODES[info];
-        } else {
-            mode = String.valueOf(info);
-        }
-
-        logger.trace("Received {} = {}", CHANNEL_CONTROL_MODE, mode);
-        updateState(CHANNEL_CONTROL_MODE, mode);
-    }
 
     @Override
     public void ping() {

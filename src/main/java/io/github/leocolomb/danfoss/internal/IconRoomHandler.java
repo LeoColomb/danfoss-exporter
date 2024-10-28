@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.influxdb.v3.client.Point;
 
 import io.github.leocolomb.danfoss.internal.protocol.Dominion;
-import io.github.leocolomb.danfoss.internal.protocol.Icon.RoomControl;
-import io.github.leocolomb.danfoss.internal.protocol.Icon.RoomMode;
 
 public class IconRoomHandler extends BaseHandler {
 
@@ -126,11 +124,10 @@ public class IconRoomHandler extends BaseHandler {
                 reportDecimal(CHANNEL_BATTERY, pkt.getByte());
                 break;
             case ROOM_ROOMMODE:
-                reportControlState(pkt.getByte());
+                reportState(CHANNEL_CONTROL_STATE, CONTROL_STATES, pkt.getByte());
                 break;
             case ROOM_ROOMCONTROL:
-                reportSwitch(CHANNEL_MANUAL_MODE, pkt.getByte() == RoomControl.Manual);
-                updateState(CHANNEL_MANUAL_MODE.concat("_number"), pkt.getByte());
+                reportState(CHANNEL_CONTROL_ROOM, CONTROL_ROOMS, pkt.getByte() == 20 ? 2 : pkt.getByte());
                 break;
             case ROOM_HEATINGCOOLINGSTATE:
                 reportSwitch(CHANNEL_HEATING_STATE, pkt.getBoolean());
@@ -146,33 +143,4 @@ public class IconRoomHandler extends BaseHandler {
             //     updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getByte()), "");
         }
     }
-
-    private void reportDecimal(String ch, long value) {
-        logger.trace("Received {} = {}", ch, value);
-        updateState(ch, value);
-    }
-
-    private void reportSwitch(String ch, boolean on) {
-        logger.trace("Received {} = {}", ch, on);
-        updateState(ch, on);
-    }
-
-    private void reportControlState(byte info) {
-        String state;
-
-        if (info >= 0 && info < CONTROL_STATES.length) {
-            state = CONTROL_STATES[info];
-        } else {
-            state = String.valueOf(info);
-        }
-
-        logger.trace("Received {} = {}", CHANNEL_CONTROL_STATE, state);
-        updateState(CHANNEL_CONTROL_STATE, state);
-    }
-
-    // private void updateProperty(String ch, Object prop) {
-    //     logger.trace("Received {} = {}", ch, prop);
-
-    //     updateState(ch, prop);
-    // }
 }

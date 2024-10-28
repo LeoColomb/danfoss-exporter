@@ -40,9 +40,37 @@ abstract public class BaseHandler {
         points.add(point);
     }
 
-    protected void reportTemperature(String ch, double temp) {
-        logger.trace("Received {} = {}", ch, temp);
-        updateState(ch, temp);
+    protected void reportDecimal(String ch, long value) {
+        logger.trace("Received {} = {}", ch, value);
+        updateState(ch, value);
+    }
+
+    protected void reportSwitch(String ch, boolean on) {
+        logger.trace("Received {} = {}", ch, on);
+        updateState(ch, on);
+    }
+
+    // private void updateProperty(String ch, Object prop) {
+    //     logger.trace("Received {} = {}", ch, prop);
+    //     updateState(ch, prop);
+    // }
+
+    protected void reportTemperature(String channel, double temp) {
+        logger.trace("Received {} = {}", channel, temp);
+        updateState(channel, temp);
+    }
+
+    protected void reportState(String channel, String[] statesMap, byte value) {
+        String state;
+
+        if (value >= 0 && value < statesMap.length) {
+            state = statesMap[value];
+        } else {
+            state = String.valueOf(value);
+        }
+
+        logger.trace("Received {} = {}", channel, state);
+        updateState(channel, state);
     }
 
     protected String getMeasurement() {
