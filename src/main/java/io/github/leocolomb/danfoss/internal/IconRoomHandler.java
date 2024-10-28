@@ -158,7 +158,6 @@ public class IconRoomHandler extends BaseHandler {
     }
 
     private void reportControlState(byte info) {
-        final String[] CONTROL_STATES = { "HOME", "AWAY", "ASLEEP", "FATAL" };
         String state;
 
         if (info >= 0 && info < CONTROL_STATES.length) {

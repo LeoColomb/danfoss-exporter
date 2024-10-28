@@ -63,7 +63,7 @@ public class DanfossBindingConstants {
     public static final String CHANNEL_UNRECOVERABLE = "unrecoverable";
 
     public static final String[] ALARM_CHANNELS = { CHANNEL_DISCONNECTED, CHANNEL_SHORTED, CHANNEL_OVERHEAT,
-            CHANNEL_UNRECOVERABLE };
+        CHANNEL_UNRECOVERABLE };
 
     public static final String CONTROL_MODE_MANUAL = "MANUAL";
     public static final String CONTROL_MODE_OVERRIDE = "OVERRIDE";
@@ -74,4 +74,12 @@ public class DanfossBindingConstants {
 
     public static final String[] CONTROL_MODES = { CONTROL_MODE_SCHEDULE, CONTROL_MODE_VACATION, CONTROL_MODE_PAUSE,
         CONTROL_MODE_OVERRIDE };
+
+    public static final String CONTROL_STATE_HOME = "HOME";
+    public static final String CONTROL_STATE_AWAY = "AWAY";
+    public static final String CONTROL_STATE_ASLEEP = "ASLEEP";
+    public static final String CONTROL_STATE_FATAL = "FATAL";
+
+    public static final String[] CONTROL_STATES = { CONTROL_STATE_HOME, CONTROL_STATE_AWAY, CONTROL_STATE_ASLEEP,
+        CONTROL_STATE_FATAL };
 }

@@ -125,7 +125,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
         }
 
         logger.trace("Received {} = {}", CHANNEL_CONTROL_MODE, mode);
-        updateState(CHANNEL_CONTROL_MODE, String.valueOf(mode));
+        updateState(CHANNEL_CONTROL_MODE, mode);
     }
 
     @Override
