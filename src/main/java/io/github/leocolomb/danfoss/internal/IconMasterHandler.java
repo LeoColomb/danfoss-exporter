@@ -169,6 +169,7 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
     public void refresh() {
         connHandler.sendRefresh(ALL_ROOMS, VACATION_SETPOINT);
         connHandler.sendRefresh(ALL_ROOMS, PAUSE_SETPOINT);
+        connHandler.sendRefresh(ALL_ROOMS, ROOMMODE);
 
         for (IconRoomHandler room : rooms) {
             if (room != null) {
