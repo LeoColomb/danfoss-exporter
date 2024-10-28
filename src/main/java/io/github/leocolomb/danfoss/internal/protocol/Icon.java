@@ -330,7 +330,7 @@ public class Icon {
         public static final int HECTARCH_SERVER_ENDPOINT                       = 28745; // 1   byte      Reads 0.
         // Class ALL_ROOMS
         public static final int VACATION_SETPOINT                              = 2955;
-        public static final int ROOMMODE                                       = 4106;
+        // public static final int ROOMMODE                                       = 4106;
         public static final int SCHEDULEMONDAY                                 = 4108;
         public static final int SCHEDULETUESDAY                                = 4109;
         public static final int SCHEDULEWEDNESDAY                              = 4110;
@@ -340,6 +340,7 @@ public class Icon {
         public static final int SCHEDULESUNDAY                                 = 4114;
         public static final int LIVINGZONE                                     = 4200;  // 7  byte[]    "Belongs to living zone" bit mask ???
         public static final int EXTENDEDATHOME                                 = 4201;  // 7  byte[]    "At home override" mode bit mask. One bit per room.
+        public static final int ROOMMODE                                       = 4204;  // 1   byte
         public static final int HOUSE_NAME                                     = 29251; // 33 String    House name
         public static final int VACATION_PLAN                                  = 29252;
         public static final int PAUSE_SETPOINT                                 = 29253;

@@ -135,10 +135,15 @@ public class IconRoomHandler extends BaseHandler {
             case ROOM_HEATINGCOOLINGSTATE:
                 reportSwitch(CHANNEL_HEATING_STATE, pkt.getBoolean());
                 break;
+            case ROOM_WARMUPACTIVATED:
+                reportSwitch(CHANNEL_WARMUP_STATE, pkt.getBoolean());
+                break;
             case ROOMNAME:
                 roomName = pkt.getString();
                 refresh();
                 break;
+            // default:
+            //     updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getByte()), "");
         }
     }
 
@@ -156,14 +161,14 @@ public class IconRoomHandler extends BaseHandler {
         final String[] CONTROL_STATES = { "HOME", "AWAY", "ASLEEP", "FATAL" };
         String state;
 
-        if (info >= RoomMode.AtHome && info <= RoomMode.Fatal) {
+        if (info >= 0 && info < CONTROL_STATES.length) {
             state = CONTROL_STATES[info];
         } else {
-            state = "";
+            state = String.valueOf(info);
         }
 
         logger.trace("Received {} = {}", CHANNEL_CONTROL_STATE, state);
-        updateState(CHANNEL_CONTROL_STATE, String.valueOf(state));
+        updateState(CHANNEL_CONTROL_STATE, state);
     }
 
     // private void updateProperty(String ch, Object prop) {

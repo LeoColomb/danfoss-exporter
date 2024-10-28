@@ -51,14 +51,16 @@ public class DanfossBindingConstants {
     public static final String CHANNEL_BRIGHTNESS = "brightness";
     public static final String CHANNEL_BATTERY = "battery";
     public static final String CHANNEL_HEATING_STATE = "heating_state";
+    public static final String CHANNEL_WARMUP_STATE = "warmup_state";
     public static final String CHANNEL_ON_TIME_7_DAYS = "on_time_7_days";
     public static final String CHANNEL_ON_TIME_30_DAYS = "on_time_30_days";
     public static final String CHANNEL_ON_TIME_TOTAL = "on_time_total";
+    public static final String CHANNEL_MANUAL_MODE = "manual_mode";
+
     public static final String CHANNEL_DISCONNECTED = "sensor_disconnected";
     public static final String CHANNEL_SHORTED = "sensor_shorted";
     public static final String CHANNEL_OVERHEAT = "overheat";
     public static final String CHANNEL_UNRECOVERABLE = "unrecoverable";
-    public static final String CHANNEL_MANUAL_MODE = "manual_mode";
 
     public static final String[] ALARM_CHANNELS = { CHANNEL_DISCONNECTED, CHANNEL_SHORTED, CHANNEL_OVERHEAT,
             CHANNEL_UNRECOVERABLE };
@@ -69,4 +71,7 @@ public class DanfossBindingConstants {
     public static final String CONTROL_MODE_VACATION = "VACATION";
     public static final String CONTROL_MODE_PAUSE = "PAUSE";
     public static final String CONTROL_MODE_OFF = "OFF";
+
+    public static final String[] CONTROL_MODES = { CONTROL_MODE_SCHEDULE, CONTROL_MODE_VACATION, CONTROL_MODE_PAUSE,
+        CONTROL_MODE_OVERRIDE };
 }

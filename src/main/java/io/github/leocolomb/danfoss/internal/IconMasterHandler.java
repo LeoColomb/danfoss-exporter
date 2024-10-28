@@ -74,31 +74,33 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                 case ROOMMODE:
                     reportControlMode(pkt.getByte());
                     break;
-                // case GLOBAL_HARDWAREREVISION:
-                //     updateProperty("hardware", pkt.getVersion().toString());
-                //     break;
-                // case GLOBAL_SOFTWAREREVISION:
-                //     firmwareVer = pkt.getVersion();
-                //     reportFirmware();
-                //     break;
-                // case GLOBAL_SOFTWAREBUILDREVISION:
-                //     firmwareBuild = Short.toUnsignedInt(pkt.getShort());
-                //     reportFirmware();
-                //     break;
-                // case GLOBAL_SERIALNUMBER:
-                //     updateProperty("serial_number", String.valueOf(pkt.getInt()));
-                //     break;
-                // case GLOBAL_PRODUCTIONDATE:
-                //     updateProperty("production_date", DateFormat.getDateTimeInstance().format(pkt.getDate(0)));
-                //     break;
-                // case MDG_CONNECTION_COUNT:
-                //     updateProperty("connection_count", String.valueOf(pkt.getByte()));
-                //     break;
-                // case RAIL_INPUTHEATORCOOL:
-                //     updateProperty("cooling", String.valueOf(pkt.getBoolean()));
-                //     break;
-                default:
-                    updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getByte()), "");
+                case SYSTEM_TIME:
+                    break;
+                case GLOBAL_HARDWAREREVISION:
+                    // updateProperty("hardware", pkt.getVersion().toString());
+                    break;
+                case GLOBAL_SOFTWAREREVISION:
+                    // firmwareVer = pkt.getVersion();
+                    // reportFirmware();
+                    break;
+                case GLOBAL_SOFTWAREBUILDREVISION:
+                    // firmwareBuild = Short.toUnsignedInt(pkt.getShort());
+                    // reportFirmware();
+                    break;
+                case GLOBAL_SERIALNUMBER:
+                    // updateProperty("serial_number", String.valueOf(pkt.getInt()));
+                    break;
+                case GLOBAL_PRODUCTIONDATE:
+                    // updateProperty("production_date", DateFormat.getDateTimeInstance().format(pkt.getDate(0)));
+                    break;
+                case MDG_CONNECTION_COUNT:
+                    // updateProperty("connection_count", String.valueOf(pkt.getByte()));
+                    break;
+                case RAIL_INPUTHEATORCOOL:
+                    // updateProperty("cooling", String.valueOf(pkt.getBoolean()));
+                    break;
+                // default:
+                //     updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getByte()), "");
             }
         }
     }
@@ -114,17 +116,16 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
     }
 
     private void reportControlMode(byte info) {
-        // final String[] CONTROL_MODES = { "HOME", "AWAY", "ASLEEP", "FATAL" };
-        // String mode;
+        String mode;
 
-        // if (info >= RoomMode.AtHome && info <= RoomMode.Fatal) {
-        //     mode = CONTROL_MODES[info];
-        // } else {
-        //     mode = "";
-        // }
+        if (info >= 0 && info < CONTROL_MODES.length) {
+            mode = CONTROL_MODES[info];
+        } else {
+            mode = String.valueOf(info);
+        }
 
-        logger.trace("Received {} = {}", CHANNEL_CONTROL_MODE, info);
-        updateState(CHANNEL_CONTROL_MODE.concat("_number"), String.valueOf(info));
+        logger.trace("Received {} = {}", CHANNEL_CONTROL_MODE, mode);
+        updateState(CHANNEL_CONTROL_MODE, String.valueOf(mode));
     }
 
     @Override
