@@ -72,6 +72,7 @@ public class IconRoomHandler extends BaseHandler {
         sendRefresh(ROOM_ROOMMODE);
         sendRefresh(ROOM_ROOMCONTROL);
         sendRefresh(ROOM_HEATINGCOOLINGSTATE);
+        sendRefresh(ROOM_WARMUPACTIVATED);
     }
 
     public void sendRefresh(int msgCode) {
@@ -139,8 +140,8 @@ public class IconRoomHandler extends BaseHandler {
                 roomName = pkt.getString();
                 refresh();
                 break;
-            // default:
-            //     updateStatus(String.valueOf(pkt.getMsgCode()), String.valueOf(pkt.getByte()), "");
+            default:
+                updateStatus(String.valueOf(pkt.getMsgCode()));
         }
     }
 }
