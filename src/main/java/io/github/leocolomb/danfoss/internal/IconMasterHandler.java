@@ -99,6 +99,8 @@ public class IconMasterHandler extends BaseHandler implements ISDGPeerHandler {
                 case RAIL_INPUTHEATORCOOL:
                     // updateProperty("cooling", String.valueOf(pkt.getBoolean()));
                     break;
+                case EXTENDEDATHOME:
+                    break;
                 default:
                     updateStatus(String.valueOf(pkt.getMsgCode()));
             }

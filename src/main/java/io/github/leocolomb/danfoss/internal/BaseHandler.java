@@ -33,7 +33,7 @@ abstract public class BaseHandler {
     }
 
     public void updateStatus(@NonNull String status) {
-        logger.info("Status {}", status);
+        logger.debug("Status {}", status);
     }
 
     protected void addPoint(Point point) {
