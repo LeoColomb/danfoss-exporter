@@ -28,7 +28,7 @@ components need to be installed.
 1. [Create a Codespace](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=219595866&skip_quickstart=true) for https://github.com/Sonic-Amiga/opensdg
 2. Install dependencies
    ```console
-   sudo apt update & sudo apt install protobuf-c-compiler libprotobuf-c-dev
+   sudo apt update && sudo apt install protobuf-c-compiler libprotobuf-c-dev cmake
    ```
 3. Build
    ```console
