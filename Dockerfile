@@ -3,7 +3,7 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package assembly:single
 
-FROM eclipse-temurin:21-alpine
+FROM eclipse-temurin:25-alpine
 RUN mkdir /opt/app
 WORKDIR /opt/app
 COPY .env.example /opt/app/.env
