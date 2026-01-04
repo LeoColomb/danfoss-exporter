@@ -10,4 +10,4 @@ RUN mkdir /opt/app
 WORKDIR /opt/app
 COPY .env.example /opt/app/.env
 COPY --from=build /home/app/target/danfoss-exporter-1.0.0-jar-with-dependencies.jar /opt/app/danfoss-exporter.jar
-ENTRYPOINT ["java","--add-opens=java.base/java.nio=ALL-UNNAMED","-jar","/opt/app/danfoss-exporter.jar"]
+ENTRYPOINT ["java","--add-opens=java.base/java.nio=ALL-UNNAMED","--sun-misc-unsafe-memory-access=allow","-jar","/opt/app/danfoss-exporter.jar"]
