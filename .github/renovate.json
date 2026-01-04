@@ -1,6 +1,9 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["local>LeoColomb/.github:renovate-config"],
+    "extends": [
+        "local>LeoColomb/.github:renovate-config",
+        "customManagers:mavenPropertyVersions"
+    ],
     "lockFileMaintenance": {
         "enabled": true,
         "automerge": true
