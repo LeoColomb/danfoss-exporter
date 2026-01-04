@@ -93,7 +93,7 @@
   </build>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- renovate: datasource=java-version depName=java-jdk packageName=java-jdk -->
+    <!-- renovate: datasource=java-version depName=java-jdk packageName=java-jdk extractVersion=^(?<version>\\d+) -->
     <java.version>21</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
