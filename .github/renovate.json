@@ -2,16 +2,11 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "local>LeoColomb/.github:renovate-config",
-        "customManagers:mavenPropertyVersions"
+        "customManagers:mavenPropertyVersions",
+        "customManagers:dockerfileVersions"
     ],
     "lockFileMaintenance": {
         "enabled": true,
         "automerge": true
-    },
-    "packageRules": [
-        {
-            "matchPackageNames": ["java-jdk", "eclipse-temurin", "maven"],
-            "groupName": "Java"
-        }
-    ]
+    }
 }
