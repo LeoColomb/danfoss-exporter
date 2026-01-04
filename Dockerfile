@@ -1,5 +1,5 @@
 # renovate: datasource=java-version depName=java-jdk packageName=java-jdk extractVersion=^(?<version>\d+)
-ARG JAVA_VERSION=21
+ARG JAVA_VERSION=25
 FROM maven:3-eclipse-temurin-${JAVA_VERSION}-alpine AS build
 COPY src /home/app/src
 COPY pom.xml /home/app
