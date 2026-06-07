@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for danfoss-exporter on 2024-05-16T21:26:36Z
+# fly.toml app configuration file generated for danfoss-exporter on 2026-06-07T22:25:02Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -11,8 +11,15 @@ kill_timeout = "5s"
 [experimental]
   auto_rollback = true
 
+[build]
+
 [deploy]
   strategy = "rolling"
 
 [env]
   ENV = "production"
+
+[[services]]
+
+[[vm]]
+  size = "shared-cpu-1x"
